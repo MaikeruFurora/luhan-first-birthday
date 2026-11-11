@@ -12,10 +12,10 @@ export const birthday = {
   baby: {
     name: 'Luhan', // shown in the navbar, hero and footer
     fullName: 'Luhan Beatriz Santos', // placeholder
-    nickname: 'Lulu',
+    nickname: 'Luhan',
     ageTurning: 1,
     tagline:
-      'Our little princess is turning one join us for cake & magic!',
+      'Join us as she celebrates her very first birthday!',
     // Framed portrait shown in the banner.
     photo: {
       src: '/images/luhan.jpg',
