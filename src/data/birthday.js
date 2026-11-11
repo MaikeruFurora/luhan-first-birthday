@@ -15,7 +15,7 @@ export const birthday = {
     nickname: 'Lulu',
     ageTurning: 1,
     tagline:
-      'Our little princess is turning one — join us for cake & magic!',
+      'Our little princess is turning one join us for cake & magic!',
     // Framed portrait shown in the banner.
     photo: {
       src: '/images/luhan.jpg',

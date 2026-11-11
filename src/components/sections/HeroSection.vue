@@ -254,12 +254,15 @@ onUnmounted(() => {
         </h1>
 
         <!-- tagline -->
-        <p data-animate="tagline" class="mt-1 max-w-md text-pretty text-lead text-plum-soft sm:mt-5">
-          {{ birthday.baby.tagline }}
-        </p>
+       <p
+  data-animate="tagline"
+  class="mt-1 max-w-xs px-3 text-pretty text-lead leading-relaxed text-plum-soft sm:mt-5 sm:max-w-md sm:px-0"
+>
+  {{ birthday.baby.tagline }}
+</p>
 
         <!-- portrait with rainbow & clouds behind -->
-        <div data-animate="photo" class="relative mt-2 w-60 sm:mt-6 sm:w-72">
+        <div data-animate="photo" class="relative mt-6 w-60 sm:mt-6 sm:w-72">
           <div class="animate-float">
             <!-- rainbow arcing out from little clouds -->
             <svg
@@ -342,12 +345,12 @@ onUnmounted(() => {
     </AppContainer>
 
     <!-- scroll hint -->
-    <a
-      href="#countdown"
-      class="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 rounded-full bg-white/70 p-3.5 text-plum-soft shadow-sm backdrop-blur-sm transition-colors hover:text-blush block"
-      aria-label="Scroll to the countdown"
-    >
-      <ArrowDown class="size-5 animate-bounce" />
-    </a>
+   <a
+  href="#countdown"
+  class="relative z-10 mt-2 mb-2 inline-flex shrink-0 self-center rounded-full bg-white/80 p-3 text-plum-soft shadow-md backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:text-blush active:scale-95 sm:absolute sm:bottom-5 sm:left-1/2 sm:mb-0 sm:mt-0 sm:-translate-x-1/2"
+  aria-label="Scroll to the countdown"
+>
+  <ArrowDown class="size-5 animate-bounce" />
+</a>
   </section>
 </template>
