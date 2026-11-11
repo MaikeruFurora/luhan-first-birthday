@@ -1,0 +1,22 @@
+{
+  "name": "luhan-birthday",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.15.1",
+    "@lucide/vue": "^1.70.0",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "tailwindcss": "^4.3.5",
+    "vite": "^6.3.5"
+  }
+}

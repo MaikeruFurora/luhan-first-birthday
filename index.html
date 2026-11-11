@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff9f3" />
+    <meta
+      name="description"
+      content="You are warmly invited to celebrate Luhan's first birthday — a magical fairytale afternoon full of cake, cuddles and sparkles."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Luhan is Turning One! ✨ A Fairytale First Birthday</title>
+    <script>
+      // Marks when the page started loading, so the app can hold the
+      // splash for a pleasant minimum beat before lifting the veil.
+      window.__splashT0 = Date.now()
+    </script>
+    <style>
+      /* ── Fairytale loading splash ──────────────────────────────
+         Rendered straight from index.html so it appears instantly,
+         before the app bundle or fonts arrive. App.vue fades it out
+         once everything is ready. Standalone critical CSS on
+         purpose — the app stylesheet may not be parsed yet. */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #c9dff7 0%, #dcc9ff 55%, #fff9f3 100%);
+      }
+
+      .splash-inner {
+        text-align: center;
+        padding: 24px;
+      }
+
+      .splash-castle {
+        width: min(52vw, 180px);
+        height: auto;
+        animation: splash-bob 2.6s ease-in-out infinite;
+      }
+
+      .splash-script {
+        margin: 18px 0 22px;
+        font-family: 'Great Vibes', 'Brush Script MT', cursive;
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        color: #e8699d;
+      }
+
+      .splash-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .splash-dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 9999px;
+        animation: splash-dot 1.2s ease-in-out infinite;
+      }
+
+      .splash-dots span:nth-child(1) {
+        background: #e8699d;
+      }
+
+      .splash-dots span:nth-child(2) {
+        background: #a184d9;
+        animation-delay: 0.15s;
+      }
+
+      .splash-dots span:nth-child(3) {
+        background: #6fa8dc;
+        animation-delay: 0.3s;
+      }
+
+      @keyframes splash-bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes splash-dot {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateY(-8px);
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .splash-castle,
+        .splash-dots span {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- shown until the app lifts the veil -->
+    <div id="splash" aria-hidden="true">
+      <div class="splash-inner">
+        <svg class="splash-castle" viewBox="0 0 200 132" aria-hidden="true">
+          <ellipse cx="100" cy="124" rx="88" ry="10" fill="#ffffff" opacity="0.55" />
+          <rect x="30" y="62" width="28" height="62" rx="2" fill="#ffffff" opacity="0.95" />
+          <rect x="142" y="62" width="28" height="62" rx="2" fill="#ffffff" opacity="0.95" />
+          <rect x="86" y="44" width="28" height="80" rx="2" fill="#ffffff" />
+          <path d="M24 62 L44 28 L64 62 Z" fill="#ffd6e8" />
+          <path d="M136 62 L156 28 L176 62 Z" fill="#c9dff7" />
+          <path d="M80 44 L100 12 L120 44 Z" fill="#dcc9ff" />
+          <path d="M44 28 V16" stroke="#e8699d" stroke-width="2" stroke-linecap="round" />
+          <path d="M44 16 L56 20 L44 24 Z" fill="#e8699d" />
+          <path d="M156 28 V16" stroke="#a184d9" stroke-width="2" stroke-linecap="round" />
+          <path d="M156 16 L168 20 L156 24 Z" fill="#a184d9" />
+          <path d="M100 12 V4" stroke="#6fa8dc" stroke-width="2" stroke-linecap="round" />
+          <path d="M100 4 L112 8 L100 12 Z" fill="#6fa8dc" />
+          <circle cx="44" cy="84" r="4" fill="#9db8dd" />
+          <circle cx="156" cy="84" r="4" fill="#9db8dd" />
+          <circle cx="100" cy="66" r="5" fill="#9db8dd" />
+          <path d="M92 126 V112 A8 8 0 0 1 108 112 V126 Z" fill="#e8a9c4" />
+        </svg>
+        <p class="splash-script">Once upon a time&hellip;</p>
+        <div class="splash-dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        #splash {
+          display: none;
+        }
+      </style>
+    </noscript>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

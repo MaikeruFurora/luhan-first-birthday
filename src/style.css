@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Fairytale design tokens — Tailwind CSS 4 @theme
+
+   MOBILE-FIRST: the invitation is designed for 360–430px
+   viewports first. Content lives in a 480px column
+   (--container-invite) that centers on larger screens, so
+   phones, tablets and desktops share one primary experience.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* Layout */
+  --container-invite: 30rem; /* 480px mobile content column */
+
+  /* Typography */
+  --font-display: "Baloo 2", "Quicksand", ui-rounded, system-ui, sans-serif;
+  --font-body: "Quicksand", ui-rounded, system-ui, sans-serif;
+  --font-script: "Great Vibes", "Brush Script MT", cursive;
+
+  /* Fluid type scale — clamp(min, preferred, max), scales with the
+     viewport and never drops below a readable size on phones */
+  --text-script: clamp(1.5rem, 5.5vw, 2rem);
+  --text-script--line-height: 1.35;
+  --text-hero: clamp(2.25rem, 9.5vw, 3.5rem);
+  --text-hero--line-height: 1.08;
+  --text-hero--letter-spacing: -0.01em;
+  --text-lead: clamp(1rem, 3.9vw, 1.125rem);
+  --text-lead--line-height: 1.65;
+  --text-section: clamp(1.5rem, 6.5vw, 2rem);
+  --text-section--line-height: 1.2;
+
+  /* Pastel rainbow — soft background fills */
+  --color-pastel-pink: #ffd6e8;
+  --color-pastel-lavender: #dcc9ff;
+  --color-pastel-blue: #c9dff7;
+  --color-pastel-peach: #ffe3cc;
+  --color-pastel-mint: #cbeddc;
+  --color-pastel-butter: #fff3c7;
+
+  /* Deeper accents — icons, headings, buttons */
+  --color-blush: #e8699d;
+  --color-lilac: #a184d9;
+  --color-baby: #6fa8dc;
+  --color-peachy: #f0996b;
+  --color-minty: #57bd8e;
+  --color-sunny: #e5a93c;
+
+  /* Neutrals */
+  --color-plum: #5c4152;
+  --color-plum-soft: #7d6372;
+  --color-cream: #fff9f3;
+
+  /* Gentle motion */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-sway: sway 5s ease-in-out infinite;
+  --animate-nudge: nudge 1.8s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.8) rotate(-8deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1) rotate(8deg);
+    }
+  }
+
+  @keyframes sway {
+    0%,
+    100% {
+      transform: rotate(-8deg) translateY(0);
+    }
+    50% {
+      transform: rotate(8deg) translateY(-10px);
+    }
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(8px);
+    }
+  }
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Never allow horizontal overflow, even from decorations */
+    overflow-x: clip;
+    /* Stop mobile browsers from inflating text on rotate */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-plum-soft);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-pastel-pink);
+    color: var(--color-plum);
+  }
+}
+
+/* ── Reusable component classes ──────────────────────────────
+   Written as plain CSS so the palette stays token-driven and
+   the classes can be safely combined: .btn .btn-primary .btn-md
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  /* Touch-first buttons: every .btn is at least 48px tall,
+     skips the 300ms tap delay and shows no tap highlight. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem; /* 48px touch target */
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  /* Hover only on real hover pointers — touch users never get
+     a stuck hover state after tapping. */
+  @media (hover: hover) {
+    .btn:hover {
+      transform: scale(1.04);
+    }
+  }
+
+  .btn:active {
+    transform: scale(0.96);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-blush);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(
+      to right,
+      var(--color-blush),
+      var(--color-lilac)
+    );
+    color: #fff;
+    box-shadow: 0 0.75rem 1.5rem -0.5rem rgba(232, 105, 157, 0.55);
+  }
+
+  .btn-secondary {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-plum);
+    border: 1px solid var(--color-pastel-lavender);
+    box-shadow: 0 2px 8px rgba(161, 132, 217, 0.18);
+  }
+
+  .btn-sm {
+    padding-inline: 1.25rem;
+    font-size: 0.875rem;
+    min-height: 3rem;
+  }
+
+  .btn-md {
+    padding-inline: 1.75rem;
+    font-size: 1rem;
+    min-height: 3.25rem;
+  }
+
+  /* Swipe carousels: keep them scrollable but hide the scrollbar
+     so the pastel design stays clean. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Accessibility ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
