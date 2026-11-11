@@ -1,80 +1,118 @@
-<script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
 
-// Audio element for background music
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const audioRef = ref(null)
 const isPlaying = ref(false)
+const isLoading = ref(false)
 
-// Simply set the audio source and play/pause on toggle
-// No complex first-interaction delays - user clicks to toggle
+const audioSrc = '/music/bgmusic.mp3'
 
-// Set audio source on mount and try to play immediately
-onMounted(() => {
-  if (audioRef.value) {
-    // Set the audio source file
-    audioRef.value.src = '/music/bg-music.mp3'
-    // Attempt to play - will be allowed after user interaction
-    audioRef.value.play().catch(() => {
-      // Browser autoplay policy - user needs to click first
-      // This is expected and normal
-    })
-  }
-})
+async function playMusic() {
+  const audio = audioRef.value
 
-// Clean up on unmount
-onUnmounted(() => {
-  audioRef.value?.pause()
-})
+  if (!audio || isLoading.value) return
 
-// Toggle function - simple play/pause
-function toggleMusic() {
-  if (isPlaying.value) {
-    audioRef.value?.pause()
-    isPlaying.value = false
-  } else {
-    audioRef.value?.play().catch(() => {
-      // Browser autoplay policy - user needs to click first
-      // This is expected and normal
-    })
+  try {
+    isLoading.value = true
+
+    await audio.play()
     isPlaying.value = true
+  } catch (error) {
+    console.warn('Autoplay blocked or music unavailable:', error)
+    isPlaying.value = false
+  } finally {
+    isLoading.value = false
   }
 }
+
+async function toggleMusic() {
+  const audio = audioRef.value
+
+  if (!audio) return
+
+  if (isPlaying.value) {
+    audio.pause()
+    return
+  }
+
+  await playMusic()
+}
+
+function handleAudioEnded() {
+  isPlaying.value = false
+}
+
+function handleAudioPause() {
+  isPlaying.value = false
+}
+
+function handleAudioPlay() {
+  isPlaying.value = true
+}
+
+function handlePageLoaded() {
+  playMusic()
+}
+
+onMounted(() => {
+  const audio = audioRef.value
+
+  if (audio) {
+    audio.volume = 0.5
+  }
+
+  // Play after the entire page has loaded
+  if (document.readyState === 'complete') {
+    playMusic()
+  } else {
+    window.addEventListener('load', handlePageLoaded, { once: true })
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('load', handlePageLoaded)
+  audioRef.value?.pause()
+})
 </script>
 
 <template>
+  <audio
+    ref="audioRef"
+    :src="audioSrc"
+    loop
+    preload="auto"
+    @play="handleAudioPlay"
+    @ended="handleAudioEnded"
+    @pause="handleAudioPause"
+  ></audio>
+
   <button
     id="music-toggle"
-    class="fixed bottom-4 right-4 rounded-xl bg-gradient-to-br from-pastel-pink to-pastel-lilac p-3 shadow-2xl shadow-pastel-pink/25 transition-all duration-300 hover:scale-110 hover:ring-2 hover:ring-pastel-lilac active:scale-95 focus:outline-none focus:ring-2 focus:ring-pastel-lilac focus:ring-offset-pastel-pink"
-    aria-label="Toggle background music"
+    type="button"
     @click="toggleMusic"
+    :disabled="isLoading"
+    :aria-label="isPlaying ? 'Pause music' : 'Play music'"
+    class="fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-pastel-pink to-pastel-lilac shadow-2xl shadow-pastel-pink/25 transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-pastel-lilac"
   >
+    <!-- Play icon -->
     <svg
-      class="size-5 flex squeeze-0 transition-colors group-hover:text-pastel-lilac"
-      :fill="isPlaying ? 'currentColor' : 'currentColor'"
-      aria-hidden="true"
-      :viewBox="isPlaying ? '0 0 24 24' : '0 0 24 24'"
+      v-if="!isPlaying"
+      class="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="currentColor"
     >
-      <path
-        v-if="!isPlaying"
-        d="M6 4v16l8-8-8-8z"
-      />
-      <path
-        v-else
-        d="M17 3h2v14H4V3zm12 4h-2v14h2V7zM4.97 4.97l1.41 1.41L4 10.83l1.41 1.41l10.59-10.59L20.83 4.97l-1.41 1.41L19.17 7.4l1.41 1.41L12 19.17 4.97 12.05z"
-      />
+      <path d="M8 5v14l11-7z" />
+    </svg>
+
+    <!-- Pause icon -->
+    <svg
+      v-else
+      class="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M6 4h4v16H6zM14 4h4v16h-4z" />
     </svg>
   </button>
 </template>
-
-<style scoped>
-#music-toggle {
-  width: 48px;
-  height: 48px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #music-toggle {
-    animation: none;
-  }
-}
-</style>

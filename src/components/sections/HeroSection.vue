@@ -344,7 +344,7 @@ onUnmounted(() => {
     <!-- scroll hint -->
     <a
       href="#countdown"
-      class="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 rounded-full bg-white/70 p-3.5 text-plum-soft shadow-sm backdrop-blur-sm transition-colors hover:text-blush md:block"
+      class="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 rounded-full bg-white/70 p-3.5 text-plum-soft shadow-sm backdrop-blur-sm transition-colors hover:text-blush block"
       aria-label="Scroll to the countdown"
     >
       <ArrowDown class="size-5 animate-bounce" />
