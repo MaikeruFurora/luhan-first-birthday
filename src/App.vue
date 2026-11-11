@@ -8,6 +8,7 @@ import HeroSection from '@/components/sections/HeroSection.vue'
 import CountdownSection from '@/components/sections/CountdownSection.vue'
 import GallerySection from '@/components/sections/GallerySection.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+import MusicPlayer from '@/components/ui/MusicPlayer.vue'
 import { useAppReady } from '@/composables/useAppReady'
 
 const { markAppReady } = useAppReady()
@@ -64,6 +65,8 @@ onMounted(async () => {
       <!-- Planned sections (built in later iterations): -->
       <!-- StorySection · DetailsSection · RsvpSection -->
     </main>
+
+    <MusicPlayer />
 
     <AppFooter />
   </div>

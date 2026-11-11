@@ -103,7 +103,6 @@ const units = computed(() => [
           >
             {{ birthday.venue.name }}
           </a>
-          · Please RSVP by {{ birthday.rsvp.deadline }}
         </p>
       </div>
     </AppContainer>

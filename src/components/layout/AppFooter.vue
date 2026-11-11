@@ -30,7 +30,7 @@ import { birthday } from '@/data/birthday'
           >
             {{ birthday.venue.name }}
           </a>
-          · {{ birthday.date.label }} · Please RSVP by {{ birthday.rsvp.deadline }}
+          · {{ birthday.date.label }}
         </p>
       </div>
     </AppContainer>

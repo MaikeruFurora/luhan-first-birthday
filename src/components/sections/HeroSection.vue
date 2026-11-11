@@ -28,6 +28,11 @@ let gsapContext = null
 // The framed portrait in the banner — baby.photo in birthday.js.
 const heroPhoto = birthday.baby.photo
 
+// Opens the venue's Google Maps link in a new tab.
+function openMaps() {
+  window.open(birthday.venue.mapsUrl, '_blank', 'noopener noreferrer')
+}
+
 // Ambient star field — scattered twinkles so the sky feels magical.
 const twinkles = [
   { left: '6%', top: '20%', size: 'size-5', color: 'text-sunny', delay: '0s' },
@@ -311,13 +316,15 @@ onUnmounted(() => {
             </span>
 
             <!-- venue text under the picture -->
-            <span
+            <button
               data-animate="chip"
               class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-semibold text-plum shadow-md ring-2 ring-blush/50 whitespace-nowrap"
+              @click="openMaps"
+              aria-label="Open {{ birthday.venue.name }} in Google Maps"
             >
               <MapPin class="size-4 shrink-0 text-lilac" />
               {{ birthday.venue.name }}
-            </span>
+            </button>
           </div>
 
           <!-- sparkles orbiting the frame -->
